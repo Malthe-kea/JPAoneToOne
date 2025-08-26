@@ -1,18 +1,22 @@
 package com.example.jpaonetoone.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 public class Employee {
 
+    @OneToOne
+    @JoinColumn(name = "useridfk", referencedColumnName = "userId", nullable = false)
+    private User user;
+
     @Id
     private int id;
     private String name;
     private LocalDateTime born;
     private Gender gender;
+    private boolean vegetarian;
 
     public int getId() {
         return id;
@@ -44,5 +48,21 @@ public class Employee {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isVegetarian() {
+        return vegetarian;
+    }
+
+    public void setVegetarian(boolean vegetarian) {
+        this.vegetarian = vegetarian;
     }
 }
