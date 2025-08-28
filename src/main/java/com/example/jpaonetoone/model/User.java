@@ -1,17 +1,18 @@
 package com.example.jpaonetoone.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
 public class User {
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private Employee employee;
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int userId;
-
     @Column(unique = true)
     private String email;
     private String password;
